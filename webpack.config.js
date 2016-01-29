@@ -9,7 +9,7 @@ module.exports = {
 
     module: {
         preLoaders: [
-            {test: /\.ts$/, loader: 'tslint'}
+            {test: /\.ts$/, loader: 'tslint', exclude: "node_modules"}
         ]
     },
 

@@ -24,14 +24,14 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
             test: /\.ts$/,
             loader: 'tslint-loader',
             exclude: [
-            root('node_modules')
+                root('../node_modules')
             ]
         },
         {
             test: /\.js$/,
             loader: "source-map-loader",
             exclude: [
-            root('node_modules/rxjs')
+                root('../node_modules/rxjs')
             ]
         }
         ],
