@@ -3,83 +3,83 @@
 /*
  * Helper: root(), and rootDir() are defined at the bottom
  */
- var path = require('path');
+var path = require('path');
 // Webpack Plugins
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin  = require('webpack/lib/DefinePlugin');
+var DefinePlugin = require('webpack/lib/DefinePlugin');
 var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 
 /*
  * Config
  */
- module.exports = {
+module.exports = {
     resolve: {
         cache: false,
-        extensions: prepend(['.ts','.js','.json','.css','.html'], '.async') // ensure .async.ts etc also works
+        extensions: prepend(['.ts', '.js', '.json', '.css', '.html'], '.async') // ensure .async.ts etc also works
     },
     devtool: 'inline-source-map',
     module: {
         preLoaders: [
-        {
-            test: /\.ts$/,
-            loader: 'tslint-loader',
-            exclude: [
-                root('../node_modules')
-            ]
-        },
-        {
-            test: /\.js$/,
-            loader: "source-map-loader",
-            exclude: [
-                root('../node_modules/rxjs')
-            ]
-        }
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader',
+                include: [
+                    path.resolve(__dirname, "../../src")
+                ]
+            },
+            {
+                test: /\.js$/,
+                loader: "source-map-loader",
+                exclude: [
+                    path.resolve(__dirname, '../rxjs')
+                ]
+            }
         ],
         loaders: [
-        {
-            test: /\.async\.ts$/,
-            loaders: ['es6-promise-loader', 'ts-loader'],
-            exclude: [ /\.(spec|e2e)\.ts$/ ]
-        },
-        {
-            test: /\.ts$/,
-            loader: 'ts-loader',
-            query: {
-                "compilerOptions": {
-                    "module": "commonjs",
-                    "moduleResolution": "node",
-                    "target": "es5",
-                    "experimentalDecorators": true,
-                    "emitDecoratorMetadata": true,
-
-                    "noEmitOnError": true,
-                    "removeComments": true,
-                }
+            {
+                test: /\.async\.ts$/,
+                loaders: ['es6-promise-loader', 'ts-loader'],
+                exclude: [/\.(spec|e2e)\.ts$/]
             },
-            exclude: [ /\.e2e\.ts$/ ]
-        },
-        { test: /\.json$/, loader: 'json-loader' },
-        { test: /\.html$/, loader: 'html-loader' },
-        { test: /\.css$/,  loader: 'raw-loader' },
-        { test: /\.jade/,  loader: 'jade' }
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                query: {
+                    "compilerOptions": {
+                        "module": "commonjs",
+                        "moduleResolution": "node",
+                        "target": "es5",
+                        "experimentalDecorators": true,
+                        "emitDecoratorMetadata": true,
+
+                        "noEmitOnError": true,
+                        "removeComments": true,
+                    }
+                },
+                exclude: [/\.e2e\.ts$/]
+            },
+            {test: /\.json$/, loader: 'json-loader'},
+            {test: /\.html$/, loader: 'html-loader'},
+            {test: /\.css$/, loader: 'raw-loader'},
+            {test: /\.jade/, loader: 'jade'}
         ],
 
         noParse: [
-        root('zone.js/dist'),
-        root('angular2/bundles')
+            root('zone.js/dist'),
+            root('angular2/bundles')
         ]
     },
-    stats: { colors: true, reasons: true },
+    stats: {colors: true, reasons: true},
     debug: false,
     plugins: [
-    new DefinePlugin({
+        new DefinePlugin({
             // Environment helpers
             'process.env': {
                 'ENV': JSON.stringify(ENV),
                 'NODE_ENV': JSON.stringify(ENV)
             }
         }),
-    new ProvidePlugin({
+        new ProvidePlugin({
             // TypeScript helpers
             '__metadata': 'ts-helper/metadata',
             '__decorate': 'ts-helper/decorate',
@@ -114,10 +114,12 @@ function rootNode(args) {
 
 function prepend(extensions, args) {
     args = args || [];
-    if (!Array.isArray(args)) { args = [args] }
-        return extensions.reduce(function(memo, val) {
-            return memo.concat(val, args.map(function(prefix) {
-                return prefix + val
-            }));
-        }, ['']);
+    if (!Array.isArray(args)) {
+        args = [args]
+    }
+    return extensions.reduce(function (memo, val) {
+        return memo.concat(val, args.map(function (prefix) {
+            return prefix + val
+        }));
+    }, ['']);
 }
