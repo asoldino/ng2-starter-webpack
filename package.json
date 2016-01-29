@@ -45,7 +45,7 @@
     "tslint-loader": "^2.1.0",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
-    "zone.js": "^0.5.10"
+    "zone.js": "0.5.10"
   },
   "devDependencies": {
     "nodeunit": "^0.9.1"
