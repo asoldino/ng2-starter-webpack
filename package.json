@@ -1,0 +1,53 @@
+{
+  "name": "ng2-starter-webpack",
+  "version": "0.0.1",
+  "description": "Set of gulp predefined tasks and dependencies to work with Angular2 and Typescript with Webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asoldino/ng2-starter-webpack.git"
+  },
+  "keywords": [
+    "angular2",
+    "webpack",
+    "starter",
+    "typescript",
+    "gulp"
+  ],
+  "author": "Andrea Soldino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asoldino/ng2-starter-webpack/issues"
+  },
+  "homepage": "https://github.com/asoldino/ng2-starter-webpack#readme",
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.34.2",
+    "es7-reflect-metadata": "^1.5.5",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "html-loader": "^0.4.0",
+    "html-webpack-plugin": "^2.7.2",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "lodash": "^4.0.1",
+    "phantomjs-polyfill": "0.0.1",
+    "phantomjs-prebuilt": "^2.1.3",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.0",
+    "tslint-loader": "^2.1.0",
+    "webpack": "^1.12.12",
+    "webpack-dev-server": "^1.14.1",
+    "zone.js": "^0.5.10"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  }
+}

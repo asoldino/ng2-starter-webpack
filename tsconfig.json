@@ -1,0 +1,18 @@
+{
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ],
+  "compilerOptions": {
+    "listFiles": true,
+    "charset": "UTF-8",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "watch": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
