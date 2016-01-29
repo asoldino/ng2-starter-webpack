@@ -17,7 +17,7 @@ function buildSystem(projectAbsDir, config) {
 	gutil = require('gulp-util'),
 	webpack = require('webpack'),
 	webpackDevServer = require('webpack-dev-server'),
-	rimraf = require('rimraf');
+	rimraf = require('gulp-rimraf');
 
 	gulp.task('clean', function() {
 		gulp.src([
