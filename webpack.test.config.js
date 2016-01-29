@@ -63,6 +63,17 @@ module.exports = {
             {test: /\.css$/, loader: 'raw-loader'},
             {test: /\.jade/, loader: 'jade'}
         ],
+        postLoaders: [
+            // instrument only testing sources with Istanbul
+            {
+                test: /\.(js|ts)$/,
+                loader: 'istanbul-instrumenter-loader',
+                exclude: [
+                    /\.e2e\.ts$/,
+                    /node_modules/
+                ]
+            }
+        ],
 
         noParse: [
             root('zone.js/dist'),
