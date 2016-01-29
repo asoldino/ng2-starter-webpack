@@ -5,7 +5,6 @@ function buildSystem(projectAbsDir, config) {
 
     var config = _.defaults(config || {}, {
     	distFolder: 'dist',
-    	coverageFolder: 'coverage',
     	devPort: 3000,
 
         webpack: {
@@ -16,16 +15,7 @@ function buildSystem(projectAbsDir, config) {
 	var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	webpack = require('webpack'),
-	webpackDevServer = require('webpack-dev-server'),
-	rimraf = require('gulp-rimraf');
-
-	gulp.task('clean', function() {
-		gulp.src([
-				config.distFolder,
-				config.coverageFolder
-			], {read: false})
-		.pipe(rimraf());
-	});
+	webpackDevServer = require('webpack-dev-server');
 
 	gulp.task('compile', function(done) {
 		var webpackProject = webpack(config.webpack.configuration);
