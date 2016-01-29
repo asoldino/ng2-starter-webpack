@@ -10,7 +10,7 @@ function testGulpNumberOfTasks(test) {
 
 	test.expect(1);
 
-	test.equal(Object.keys(gulp.tasks).length, 3, "3 Tasks expected");
+	test.equal(Object.keys(gulp.tasks).length, 4, "4 Tasks expected");
 
 	test.done();
 }
@@ -18,10 +18,13 @@ function testGulpNumberOfTasks(test) {
 function testGulpNameOfTasks(test) {
 	var gulp = require('./index.js')();
 
-	test.expect(3);
+	test.expect(4);
 
 	var taskNames = Object.keys(gulp.tasks);
 
+	// I have the clean task configured
+	test.ok(taskNames.indexOf('clean') > -1);
+	// and so on...
 	test.ok(taskNames.indexOf('compile') > -1);
 	test.ok(taskNames.indexOf('test') > -1);
 	test.ok(taskNames.indexOf('dev-server') > -1);
