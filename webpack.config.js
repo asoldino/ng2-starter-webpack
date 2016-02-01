@@ -1,26 +1,34 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 module.exports = {
-    entry: './src/index.ts',
+    devtool: 'source-map',
+    cache: true,
+    debug: true,
+
+    entry: {
+        app: './src/index.ts',
+        vendor: './src/vendor.ts'
+    },
     output: {
         path: 'dist',
-        filename: 'bundle.js'
+        filename: '[name].js',
+        sourceMapFilename: '[name].map',
+        chunkFilename: '[id].chunk.js',
+        pathinfo: true
     },
 
-    module: {
-        preLoaders: [
-            {test: /\.ts$/, loader: 'tslint', exclude: "node_modules"}
-        ]
-    },
+    plugins: [
+        new CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js', minChunks: Infinity}),
+        //new CommonsChunkPlugin({name: 'common', filname: 'common.js', minChunks: 2, chunks:['app', 'vendor']}),
+        new HtmlWebpackPlugin({
+            template: __dirname + '/index.html',
+            inject: 'body',
 
-    plugins: [new HtmlWebpackPlugin({
-        template: __dirname + '/index.html',
-        inject: 'body',
-
-        title: 'Project'
-    })],
-
-    devtool: 'source-map',
+            title: 'Project'
+        })
+    ],
 
     resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
@@ -30,6 +38,7 @@ module.exports = {
             {test: /\.ts$/, loader: 'ts-loader'},
             {test: /\.html$/, loader: 'html-loader'},
             {test: /\.jade$/, loader: 'jade'},
+            {test: /\.css/, loader: 'css-loader'},
 
             {test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery'},
 
@@ -39,7 +48,9 @@ module.exports = {
             {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
             {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
             {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"}
-        ]
+        ],
+
+        noParse: [/angular2-polyfills/]
     },
 
     ts: {
